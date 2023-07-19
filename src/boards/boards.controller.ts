@@ -42,6 +42,11 @@ export class BoardsController {
     return this.boardsService.updateBoardStatus(id, status);
   }
 
+  @Get()
+  getAllBoards(): Promise<Board[]> {
+    return this.boardsService.getAllBoards();
+  }
+
   // @Get()
   // getAllBoards(): Board[] {
   //   return this.boardsService.getAllBoards();
