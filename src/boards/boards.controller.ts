@@ -60,9 +60,9 @@ export class BoardsController {
   }
 
   @Get()
-  getAllBoards(@GetUser() user: User): Promise<Board[]> {
-    this.logger.verbose(`User ${user.username} trying to get all boards`);
-    return this.boardsService.getAllBoards(user);
+  getAllBoards(): Promise<Board[]> {
+    this.logger.verbose(`User trying to get all boards`);
+    return this.boardsService.getAllBoards();
   }
 
   // @Get()

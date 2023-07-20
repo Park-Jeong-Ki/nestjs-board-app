@@ -40,7 +40,9 @@ export class BoardsService {
 
   async deleteBoard(id: number, user: User): Promise<void> {
     // 자신만 지우게 하는 로직 구현 불가...
-    // const result = await this.boardRepository.delete({ id, user });
+    // const result = await this.boardRepository.delete({ id, user: user });
+    const found = await this.boardRepository.findOne({ where: { id } });
+
     const result = await this.boardRepository.delete({ id });
     if (result.affected === 0) {
       throw new NotFoundException(`Can't find Board with id ${id}`);
@@ -54,11 +56,8 @@ export class BoardsService {
     return board;
   }
 
-  async getAllBoards(user: User): Promise<Board[]> {
-    const query = this.boardRepository.createQueryBuilder('board');
-    query.where('board.userId = :userId', { userId: user.id });
-    const boards = await query.getMany();
-    return boards;
+  async getAllBoards(): Promise<Board[]> {
+    return this.boardRepository.find();
   }
 
   // private boards: Board[] = [];
